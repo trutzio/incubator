@@ -70,7 +70,7 @@ resource "hcloud_zone_rrset" "test" {
 
 provider "docker" {
   host     = "ssh://root@${hcloud_primary_ip.test.ip_address}"
-  ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null", "-i", "id_ed25519"]
+  ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null", "-i", "./id_ed25519"]
 }
 
 resource "docker_image" "nginx" {
