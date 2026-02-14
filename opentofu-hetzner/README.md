@@ -11,8 +11,9 @@
 
 # Quickstart
 
-1. `ssh-keygen -t ed25519 -f id_ed25519` — generate key pair
-1. Disable security inheritance on file `./id_ed25519`, become owner of this file and get full access. This is important because `ssh` doesn't allow key files with bad permissions.
-1. `tofu init` — install OpenTofu provider
-1. `tofu apply -auto-approve` — create resources in Hetzner Cloud. Please enter your domain name here, like `yourcompany.de`.
+1. `ssh-keygen -t ed25519 -f id_ed25519` generate key pair
+    1. Windows: Disable security inheritance on file `./id_ed25519`, become owner of this file and get full access. This is important because `ssh` doesn't allow key files with bad permissions.
+    1. Linux/Unix: `chmod 600 ./id_ed25519`
+1. `tofu init` install OpenTofu provider
+1. `tofu apply -auto-approve` create resources in Hetzner Cloud. Please enter your domain name here, like `yourcompany.de`.
 1. Open http://test.yourcompany.de:8080 in your browser.
