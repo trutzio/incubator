@@ -1,1 +1,3 @@
 /epstein-files/
+node_modules/
+tailwindcss/src/output.css
