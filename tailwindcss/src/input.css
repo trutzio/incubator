@@ -1,5 +1,49 @@
 @import "tailwindcss";
+@source "fonts/inter.css";
 @theme {
-  --color-primary-500: oklch(0.32 0.1119 35);
-  --color-secondary-500: oklch(0.9778 0.017 215);
+  --color-prussian-blue-50: oklch(95.73% 0.022 243.8);
+  --color-prussian-blue-100: oklch(91.38% 0.044 247.26);
+  --color-prussian-blue-200: oklch(83.22% 0.089 246.95);
+  --color-prussian-blue-300: oklch(75.33% 0.133 248.56);
+  --color-prussian-blue-400: oklch(68.2% 0.173 251.11);
+  --color-prussian-blue-500: oklch(62.36% 0.206 255.13);
+  --color-prussian-blue-600: oklch(52.86% 0.174 254.92);
+  --color-prussian-blue-700: oklch(43.14% 0.138 254.14);
+  --color-prussian-blue-800: oklch(32.84% 0.1 252.57);
+  --color-prussian-blue-900: oklch(21.38% 0.059 249.31);
+  --color-prussian-blue-950: oklch(17.72% 0.046 246.9);
+
+  --color-tiger-flame-50: oklch(95.44% 0.023 37.38);
+  --color-tiger-flame-100: oklch(90.82% 0.048 33.97);
+  --color-tiger-flame-200: oklch(82.2% 0.101 34.3);
+  --color-tiger-flame-300: oklch(74.71% 0.155 35.31);
+  --color-tiger-flame-400: oklch(68.6% 0.206 35.01);
+  --color-tiger-flame-500: oklch(64.63% 0.241 32.62);
+  --color-tiger-flame-600: oklch(54.79% 0.202 32.99);
+  --color-tiger-flame-700: oklch(44.5% 0.161 33.65);
+  --color-tiger-flame-800: oklch(33.51% 0.118 34.67);
+  --color-tiger-flame-900: oklch(21.72% 0.07 38.9);
+  --color-tiger-flame-950: oklch(17.96% 0.054 42.09);
+
+  --font-display: "Inter", sans-serif;
+}
+
+body {
+  @apply font-display bg-neutral-950 text-neutral-50;
+}
+
+h1 {
+  @apply text-prussian-blue-400 pt-7 text-4xl font-black;
+}
+
+h2 {
+  @apply text-tiger-flame-400 pt-5 text-3xl font-bold;
+}
+
+h3 {
+  @apply pt-3 text-2xl font-semibold;
+}
+
+p {
+  @apply pt-3 text-lg;
 }
