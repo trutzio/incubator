@@ -10,4 +10,4 @@ COPY server.js ./
 COPY index.ejs ./
 CMD ["node", "server.js"]
 
-COPY blog ./blog
+COPY --exclude=.obsidian/ blog ./blog

@@ -3,6 +3,9 @@
   font-feature-settings:
     "liga" 1,
     "calt" 1; /* fix for Chrome */
+  --color-accent: oklch(0.8279 0.1059 50);
+  --color-primary: oklch(0.9 0.01 50);
+  --color-secondary: oklch(0.08 0.01 50);
 }
 @supports (font-variation-settings: normal) {
   :root {
@@ -11,8 +14,8 @@
 }
 
 body {
-  color: oklch(0.9 0.01 50); /* #e4dcd8 */
-  background-color: oklch(0.08 0.01 50); /* #030101 */
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
   padding-left: 2rem;
   padding-right: 2rem;
   padding-top: 0.5rem;
@@ -21,5 +24,21 @@ body {
 }
 
 a {
-  color: oklch(0.7 0.185 50); /* #f57400 */
+  color: var(--color-accent);
+}
+
+code {
+  font-family: "Inter Mono", monospace;
+}
+
+pre > code {
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  padding: 0.3em 0.5em;
+  border-radius: 3px;
+}
+
+pre {
+  margin-left: 1rem;
+  width: 100%;
 }

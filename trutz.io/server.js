@@ -1,7 +1,11 @@
 const fastify = require("fastify")({ logger: true });
-const path = require("node:path");
 const marked = require("marked");
+const path = require("node:path");
 const fs = require("fs");
+
+marked.use({
+  gfm: true,
+});
 
 fastify.register(require("@fastify/static"), {
   root: path.join(__dirname, "public"),
@@ -26,7 +30,7 @@ fastify.get("/*", async (req, reply) => {
   }
   try {
     const mdContent = await fs.promises.readFile(mdFilePath, "utf-8");
-    const htmlContent = marked.parse(mdContent, { gfm: true });
+    const htmlContent = marked.parse(mdContent);
     return reply.view("index.ejs", { content: htmlContent });
   } catch (err) {
     fastify.log.error(err);
