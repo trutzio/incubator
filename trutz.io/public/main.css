@@ -31,14 +31,10 @@ code {
   font-family: "Inter Mono", monospace;
 }
 
-pre > code {
+pre {
   color: var(--color-secondary);
   background-color: var(--color-primary);
-  padding: 0.3em 0.5em;
+  padding: 0.2em 0.7em;
   border-radius: 3px;
-}
-
-pre {
-  margin-left: 1rem;
   width: 100%;
 }
