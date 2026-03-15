@@ -1,0 +1,18 @@
+{
+  "name": "trutz.io",
+  "version": "1.0.0",
+  "description": "Framework behind trutz.io",
+  "license": "Apache-2.0",
+  "author": "Christian Trutz",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "fastify": "^5.8.2",
+    "@fastify/static": "^9.0.0",
+    "@fastify/view": "^11.1.1",
+    "ejs": "^5.0.1",
+    "marked": "^17.0.4"
+  }
+}
