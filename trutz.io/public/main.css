@@ -37,4 +37,5 @@ pre {
   padding: 0.2em 0.7em;
   border-radius: 3px;
   width: 100%;
+  overflow: auto;
 }
