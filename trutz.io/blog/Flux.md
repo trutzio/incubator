@@ -6,8 +6,12 @@ Eine ausführliche Installationsanleitung befindet sich [hier](https://fluxcd.io
 
 Siehe auch [https://fluxcd.io/flux/installation/#bootstrap-with-flux-cli](https://fluxcd.io/flux/installation/#bootstrap-with-flux-cli) und speziell [diesen Link](https://fluxcd.io/flux/installation/bootstrap/github/) für den Bootstrap unter GitHub.
 
-Der Bootstrap Befehl erzeugt innerhalb eines Git Repositories den Pfad für die entsprechenden Cluster und gleichzeitig die Flux Controller. Ein Beispiel Bootstrap Befehl sieht so aus:
+Der Bootstrap Befehl erzeugt innerhalb eines Git Repositories den Pfad für die entsprechenden Cluster und gleichzeitig die Flux Controller im k8s Cluster. Ein Beispiel Bootstrap Befehl sieht so aus:
 
 ```shell
-flux bootstrap git --url=ssh://git@github.com/trutzonline/infrastructure.git --branch=dev --path=clusters/schulung/dev --private-key-file=schulung
+flux bootstrap git
+    --url=ssh://git@github.com/trutzonline/infrastructure.git 
+    --branch=dev 
+    --path=clusters/schulung/dev 
+    --private-key-file=schulung
 ```
