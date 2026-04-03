@@ -97,3 +97,99 @@ pgserver --rm postgres` --rm entfernt automatisch einen Container nachdem er ges
 1. `docker container logs pgserver` listet die Logs eines Containers auf
 1. `docker container logs -f pgserver` listet dauerhaft die Logs des Containers, mit Ctrl-C erhält man die Console wieder
 
+## Docker Exec
+
+1. `docker container run -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 -d -v data:/var/lib/postgresql --name pgserver --rm postgres` starte einen Postgres Container
+1. `docker container exec pgserver ls` der exec Unterbefehl führt innerhalb eines Containers einen beliebigen Befehl aus, der natürlich im Container installiert sein muss
+1. `docker container exec -it pgserver bash` starte eine Bash innerhalb des Containers, die Parameter `-it` müssen mitgegeben werden da wir mit der Bash einen interaktiven Terminal erhalten
+1. `env` liefert die Environment Variablen innerhalb des Containers, man sieht hier die gesetzte `POSTGRES_HOST_AUTH_METHOD`
+1. beleibige Befehle wie `ps` können innerhalb des Containers ausgeführt werden
+
+## Postgres Client
+
+1. `docker container run -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 -d -v data:/var/lib/postgresql --name pgserver --rm postgres` starte einen Postgres Container
+1. `docker container exec -it pgserver bash` starte eine Bash innerhalb des Containers
+1. `psql -U postgres` starte den Postgres Client, der sich mit dem Server auf localhost verbindet auf dem PG Standard Port 5432 mit dem User `postgres` (Standard PG User)
+1. Führe mit der Postgres Extension die SQL Befehle aus um eine Tabelle mit Inhalten zu erzeugen
+
+```sql
+create table person (id int primary key, name varchar(255) not null, age int not null);
+insert into person (id, name, age) values (1, 'Alice', 30);
+insert into person (id, name, age) values (2, 'Bob', 25);
+insert into person (id, name, age) values (3, 'Charlie', 35);
+select * from person;
+```
+
+1. Betrachte mit `\dt` diese Tabelle nun auf dem Console mit psql
+1. Führe ein `SELECT * FROM person` aus, d.h. es wurde über zwei unterschiedliche Wege eine Verbindung zum PG Server aufgebaut
+
+## Docker Network
+
+1. `docker network ls` listet alle virtuellen Netzwerke auf
+1. `docker network create pgnet`
+1. `docker network connect pgnet pgserver` verbindet den Container pgserver in das Netz pgnet
+1. `docker container inspect pgserver` listet die Konfiguration des Containers pgserver
+1. `docker container inspect --format "{{json .NetworkSettings.Networks}}" pgserver | jq` listet die Netzwerkeinstellungen des Containers pgserver
+1. Beachte zwei unterschiedliche Netzwerke und den DNS Namen im Netzwerk pgnet
+
+## PGAdmin4
+
+1. `docker container run --rm dpage/pgadmin4` erster Versuch um pgadmin4 zu starten
+1. Environment Variablen `PGADMIN_DEFAULT_EMAIL` und `PGADMIN_DEFAULT_PASSWORD` müssen gesetzt werden, es sind die Credentials der Admins
+1. `docker container run --rm -e PGADMIN_DEFAULT_EMAIL=admin@test.de -e PGADMIN_DEFAULT_PASSWORD=secret dpage/pgadmin4` startet PgAdmin4 erfolgreich, der im Container auf Port 80 erreichbar ist, Ctrl-C und erneuter Start mit
+1. `docker container run --rm -e PGADMIN_DEFAULT_EMAIL=admin@test.de -e PGADMIN_DEFAULT_PASSWORD=secret -p 8080:80 --name pgadmin -d --network pgnet dpage/pgadmin4` durch die Option `--network pgnet` wird dieser Container in das Netzwerk pgnet aufgenommen
+
+## Aufgabe
+
+1. Überprüfe, dass der Container pgadmin im Netzwerk pgnet enthalten ist
+1. `docker container inspect --format "{{json .NetworkSettings.Networks}}" pgadmin | jq`
+
+## Administration des Postgres Servers
+
+1. http://localhost:8080 und mit den obigen Credentials anmelden
+1. Neue Postgres Server Verbindung aufbauen mit `pgserver` als Hostname und `postgres` als Username
+1. Navigiere zu den Tabellen und betrachte die Personen-Tabelle
+1. Disconnect from Server
+
+## Aufgabe
+
+1. Entferne mit `docker network disconnect pgnet pgserver` den pgserver aus dem Netzwerk pgnet
+1. Versuche über die Oberfläche die Verbindung erneut aufzubauen, funktioniert nicht
+1. Wie kann man dieses Problem beheben?
+1. Lösung `docker network connect pgnet pgserver`
+
+## Aufgabe
+
+1. Entferne alle zuvor erstellten Container, Volumes und Networks
+
+## Docker Compose
+
+1. Erstelle eine Datei mit dem Name `compose.yaml` und folgendem Inhalt
+
+```yaml
+services:
+  pgserver:
+    image: postgres
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@test.de
+      PGADMIN_DEFAULT_PASSWORD: secret
+    ports:
+      - "8080:80"
+    depends_on:
+      - pgserver
+
+volumes:
+  data: {}
+```
+
+1. Starte alle definierten Services / Container innerhalb dieser Datei mit einem einzigen Befehl `docker compose up -d`
+1. Untersuche wie welche Resourcen erzeugt wurden (Container, Volumes, Networks)
