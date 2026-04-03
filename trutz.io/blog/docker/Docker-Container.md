@@ -193,3 +193,4 @@ volumes:
 
 1. Starte alle definierten Services / Container innerhalb dieser Datei mit einem einzigen Befehl `docker compose up -d`
 1. Untersuche wie welche Resourcen erzeugt wurden (Container, Volumes, Networks)
+1. `docker compose down` um alle vorhin definierten Resourcen zu entfernen
