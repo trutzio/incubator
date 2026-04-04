@@ -1,13 +1,14 @@
 ## Nginx Container starten
 
+1. Der einfachste Befehl um einen Docker Container zu starten
+1. Was ist ein Image?
+1. `docker container run nginx` Container mit Image nginx, Ctrl-C
+1. Logs
+
+Notizen:
+
 1. [Nginx](https://nginx.org/) ein HTTP Webserver
    ![Marktanteil von nginx](https://www.pro-linux.de/images/NB3/imgdb/servermarktanteile-im-monat-mai.jpg)
-1. `docker container run nginx`
-   1. Logs können gesichtet werden
-   1. Problem: Server ist lediglich im Container selber auf Port 80 erreichbar
-   1. mit Ctrl-C beenden
-1. `docker container run -p 8080:80 nginx` Host Port 8080 wird auf den Container Port 80 gemapped
-1. http://localhost:8080 im Browser aufrufen um die Startseite von nginx zu sehen, Splitfenster mit den Logs in der Console
 
 ## Detached Modus
 
@@ -15,6 +16,11 @@
 1. die Id des Containers wird zurückgemeldet
 1. `docker container ls` listet die Container, die gerade laufen
 1. die Spalte PORTS enthält das Portmapping, das mit der Option -p mitgegeben wurde
+
+## Port Mapping
+
+1. `docker container run -p 8080:80 nginx` Host Port 8080 wird auf den Container Port 80 gemapped
+1. http://localhost:8080 im Browser aufrufen um die Startseite von nginx zu sehen, Splitfenster mit den Logs in der Console
 
 ## Container stoppen
 
