@@ -4,22 +4,19 @@
 1. Was ist ein Image?
 1. `docker container run nginx` Container mit Image nginx, Ctrl-C
 1. Logs
-
-Notizen:
-
 1. [Nginx](https://nginx.org/) ein HTTP Webserver
    ![Marktanteil von nginx](https://www.pro-linux.de/images/NB3/imgdb/servermarktanteile-im-monat-mai.jpg)
 
 ## Detached Modus
 
-1. `docker container run -p 8080:80 -d nginx` startet den Container im Hintergrund
+1. `docker container run -d nginx` startet den Container im Hintergrund
 1. die Id des Containers wird zurückgemeldet
 1. `docker container ls` listet die Container, die gerade laufen
-1. die Spalte PORTS enthält das Portmapping, das mit der Option -p mitgegeben wurde
 
 ## Port Mapping
 
-1. `docker container run -p 8080:80 nginx` Host Port 8080 wird auf den Container Port 80 gemapped
+1. `docker container run -d -p 8080:80 nginx` Host Port 8080 wird auf den Container Port 80 gemapped
+1. die Spalte PORTS enthält das Portmapping, das mit der Option -p mitgegeben wurde
 1. http://localhost:8080 im Browser aufrufen um die Startseite von nginx zu sehen, Splitfenster mit den Logs in der Console
 
 ## Container stoppen
@@ -33,15 +30,18 @@ Notizen:
 1. `docker container rm [container id]` entfernt einen Container
 1. `docker container prune` entfernt alle gestoppten Container
 
-## Aufgabe
+## Aufgabe: Laufende Container entfernen
 
-1. Untersuche, ob ein laufender Container gestoppt werden kann, ohne ihn vorher zu stoppen
+1. Untersuche, ob ein laufender Container entfernt werden kann, ohne ihn vorher zu stoppen
 
 ## Postgres als Container
 
 1. `docker container run postgres` enthält eine Fehlermeldung, da eine Environment Variable nicht gesetzt wurde
 1. `docker container run -e POSTGRES_HOST_AUTH_METHOD=trust postgres` fährt die Datenbank hoch, die Umgebungsvariable wird innerhalb des Containers gesetzt und kann von der Initialisierungsskript der Datenbank gelesen werden, Postgres wird damit ohne Authentifizierung hochgefahren
 1. Learning: mit `-e` können Umgebungsvariablen innerhalb des Containers gesetzt werden
+doc
+## Aufgabe: Postgres auf Port 5432
+
 1. `docker container run -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 -d postgres` fährt den Postgres Container im Hintergrund hoch und Port 5432 wird vom Host in den Container gemappt
 
 ## Postgres Client (Visual Studio Code)
