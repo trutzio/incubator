@@ -39,7 +39,8 @@
 1. `docker container run postgres` enthält eine Fehlermeldung, da eine Environment Variable nicht gesetzt wurde
 1. `docker container run -e POSTGRES_HOST_AUTH_METHOD=trust postgres` fährt die Datenbank hoch, die Umgebungsvariable wird innerhalb des Containers gesetzt und kann von der Initialisierungsskript der Datenbank gelesen werden, Postgres wird damit ohne Authentifizierung hochgefahren
 1. Learning: mit `-e` können Umgebungsvariablen innerhalb des Containers gesetzt werden
-doc
+   doc
+
 ## Aufgabe: Postgres auf Port 5432
 
 1. `docker container run -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 -d postgres` fährt den Postgres Container im Hintergrund hoch und Port 5432 wird vom Host in den Container gemappt
@@ -54,7 +55,6 @@ doc
 
 1. Ein Docker Volume ist eine anonyme Festplatte für einen Docker Container
 1. `docker volume ls` listet alle virtuellen Festplatten des Systems auf
-1. jeder Container erhält automatisch eine anonyme virtuelle Festplatte auf der die Dateien geschrieben werden
 1. Overlay2 Dateisystem
    ![Overlay2](https://docs.docker.com/engine/storage/drivers/images/overlay_constructs.webp)
 1. `docker volume prune` entfernt nicht mehr verwendete Volumes
@@ -62,9 +62,10 @@ doc
 ## Postgres mit einem Volume
 
 1. `docker create volume data` erzeugt ein Volume
+1. `docker volume ls`
 1. `docker container run -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 -d -v data:/var/lib/postgresql postgres` -v gibt das Volume an, das an einer bestimmten Stelle im Dateisystem gemountet wird
 
-## Aufgabe
+## Aufgabe: Volume erneut verwenden
 
 1. Fahre einen Postgres Container hoch mit einem gemounteten Volume unter `/var/lib/postgresql`
 1. mit dem Postgres Client erzeuge eine Tabelle, füge Zeilen hinzu und mit `SELECT` die Zeilen auflisten
@@ -74,7 +75,7 @@ doc
 1. Verbinde dich mit dem Postgres Client
 1. Die Tabelle, die mit dem Contaiener davor erzeugt wurde ist da, da die Daten des Postgres DB Serves auf dem Volume gespeichert wurden
 
-## Aufgabe
+## Aufgabe: Environment Variable und Initialisierung Datenbank
 
 1. Starte einen Postgres Container mit einem nicht-anonymen Volume und mit der Environment Variable `POSTGRES_HOST_AUTH_METHOD=trust`
 1. Stoppe und entferne den Container
@@ -92,7 +93,7 @@ pgserver postgres` --name legt den Namen eines Containers fest
 pgserver --rm postgres` --rm entfernt automatisch einen Container nachdem er gestoppt wurde
 1. `docker container stop pgserver` stoppt und entfernt automatisch den Container
 
-## Aufgabe
+## Aufgabe: Option --rm
 
 1. Starte einen Postgres Container mit einem anonymen Volume und mit der Option `--rm`
 1. Stoppe den Container
