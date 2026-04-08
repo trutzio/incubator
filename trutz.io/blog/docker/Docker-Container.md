@@ -146,7 +146,7 @@ select * from person;
 1. `docker container run --rm -e PGADMIN_DEFAULT_EMAIL=admin@test.de -e PGADMIN_DEFAULT_PASSWORD=secret dpage/pgadmin4` startet PgAdmin4 erfolgreich, der im Container auf Port 80 erreichbar ist, Ctrl-C und erneuter Start mit
 1. `docker container run --rm -e PGADMIN_DEFAULT_EMAIL=admin@test.de -e PGADMIN_DEFAULT_PASSWORD=secret -p 8080:80 --name pgadmin -d --network pgnet dpage/pgadmin4` durch die Option `--network pgnet` wird dieser Container in das Netzwerk pgnet aufgenommen
 
-## Aufgabe
+## Aufgabe: Container in Netzwerk
 
 1. Überprüfe, dass der Container pgadmin im Netzwerk pgnet enthalten ist
 1. `docker container inspect --format "{{json .NetworkSettings.Networks}}" pgadmin | jq`
@@ -158,16 +158,12 @@ select * from person;
 1. Navigiere zu den Tabellen und betrachte die Personen-Tabelle
 1. Disconnect from Server
 
-## Aufgabe
+## Aufgabe: network disconnect
 
 1. Entferne mit `docker network disconnect pgnet pgserver` den pgserver aus dem Netzwerk pgnet
 1. Versuche über die Oberfläche die Verbindung erneut aufzubauen, funktioniert nicht
 1. Wie kann man dieses Problem beheben?
 1. Lösung `docker network connect pgnet pgserver`
-
-## Aufgabe
-
-1. Entferne alle zuvor erstellten Container, Volumes und Networks
 
 ## Docker Compose
 
