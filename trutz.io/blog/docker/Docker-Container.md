@@ -39,7 +39,6 @@
 1. `docker container run postgres` enthält eine Fehlermeldung, da eine Environment Variable nicht gesetzt wurde
 1. `docker container run -e POSTGRES_HOST_AUTH_METHOD=trust postgres` fährt die Datenbank hoch, die Umgebungsvariable wird innerhalb des Containers gesetzt und kann von der Initialisierungsskript der Datenbank gelesen werden, Postgres wird damit ohne Authentifizierung hochgefahren
 1. Learning: mit `-e` können Umgebungsvariablen innerhalb des Containers gesetzt werden
-   doc
 
 ## Aufgabe: Postgres auf Port 5432
 
@@ -49,7 +48,7 @@
 
 1. Postgres Extension `cweijan.vscode-postgresql-client2` in Visual Studio Code installieren
 1. Verbindung zum Docker Container aufbauen, lokaler Port 5432 wird auf den Port 5432 innerhalb des Containers gemappt
-1. `CREATE TABLE person ...` Query ausführen, 2-3 Personen in die Tabelle einfügen und ein `SELECT ...` danach ausführen, man kann sehen, dass man hier eine normale Postgres DB INstant hat
+1. `CREATE TABLE person ...` Query ausführen, 2-3 Personen in die Tabelle einfügen und ein `SELECT ...` danach ausführen, man kann sehen, dass man hier eine normale Postgres DB Instanz hat
 
 ## Docker Volumes
 
@@ -73,7 +72,7 @@
 1. Beachte, dass das Volume nicht gelöscht wird
 1. Starte einen neuen Container und verwende das Volume von vorhin wieder
 1. Verbinde dich mit dem Postgres Client
-1. Die Tabelle, die mit dem Contaiener davor erzeugt wurde ist da, da die Daten des Postgres DB Serves auf dem Volume gespeichert wurden
+1. Die Tabelle, die mit dem Container davor erzeugt wurde ist da, da die Daten des Postgres DB Serves auf dem Volume gespeichert wurden
 
 ## Aufgabe: Environment Variable und Initialisierung Datenbank
 
@@ -97,7 +96,7 @@ pgserver --rm postgres` --rm entfernt automatisch einen Container nachdem er ges
 
 1. Starte einen Postgres Container mit einem anonymen Volume und mit der Option `--rm`
 1. Stoppe den Container
-1. Überprüfe, ob beim entfernen des Containers aus das anonyme Volume automatisch entfernt wurde
+1. Überprüfe, ob beim entfernen des Containers auch das anonyme Volume automatisch entfernt wurde
 
 ## Container Logs
 
@@ -142,7 +141,7 @@ select * from person;
 ## PGAdmin4
 
 1. `docker container run --rm dpage/pgadmin4` erster Versuch um pgadmin4 zu starten
-1. Environment Variablen `PGADMIN_DEFAULT_EMAIL` und `PGADMIN_DEFAULT_PASSWORD` müssen gesetzt werden, es sind die Credentials der Admins
+1. Environment Variablen `PGADMIN_DEFAULT_EMAIL` und `PGADMIN_DEFAULT_PASSWORD` müssen gesetzt werden, es sind die Credentials des Admins
 1. `docker container run --rm -e PGADMIN_DEFAULT_EMAIL=admin@test.de -e PGADMIN_DEFAULT_PASSWORD=secret dpage/pgadmin4` startet PgAdmin4 erfolgreich, der im Container auf Port 80 erreichbar ist, Ctrl-C und erneuter Start mit
 1. `docker container run --rm -e PGADMIN_DEFAULT_EMAIL=admin@test.de -e PGADMIN_DEFAULT_PASSWORD=secret -p 8080:80 --name pgadmin -d --network pgnet dpage/pgadmin4` durch die Option `--network pgnet` wird dieser Container in das Netzwerk pgnet aufgenommen
 
@@ -195,5 +194,5 @@ volumes:
 ```
 
 1. Starte alle definierten Services / Container innerhalb dieser Datei mit einem einzigen Befehl `docker compose up -d`
-1. Untersuche wie welche Resourcen erzeugt wurden (Container, Volumes, Networks)
+1. Untersuche welche Resourcen erzeugt wurden (Container, Volumes, Networks)
 1. `docker compose down` um alle vorhin definierten Resourcen zu entfernen
