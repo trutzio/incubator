@@ -1,3 +1,11 @@
+## Einführung
+
+1. Grundlage für die Arbeit mit Container, wir gehen in die Breite und nicht in die Tiefe, eine möglichst schnelle Einführung für ein erstes Kennenlernen
+1. Starten einer Postgres DB in einem Container
+1. Die Daten der DB in einem Volume speichern
+1. PGAdmin4 in einem Container
+1. die Kommunikation zwischen Container
+
 ## Nginx Container starten
 
 1. Der einfachste Befehl um einen Docker Container zu starten
@@ -196,3 +204,11 @@ volumes:
 1. Starte alle definierten Services / Container innerhalb dieser Datei mit einem einzigen Befehl `docker compose up -d`
 1. Untersuche welche Resourcen erzeugt wurden (Container, Volumes, Networks)
 1. `docker compose down` um alle vorhin definierten Resourcen zu entfernen
+
+## Fazit
+
+1. Arbeit mit Container über die Console aber auch
+1. über Docker Compose, wenn ich mehrere Container habe
+1. Container starten schnell und können auch schnell wieder entfernt werden, sind als vergänglich
+1. Daten werden auf Volumes persistiert
+1. Für die Kommunikation zwischen Container werden Docker Networks benötigt
