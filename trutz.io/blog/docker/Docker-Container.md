@@ -4,7 +4,7 @@
 1. Starten einer Postgres DB in einem Container
 1. Die Daten der DB in einem Volume speichern
 1. PGAdmin4 in einem Container
-1. die Kommunikation zwischen Container
+1. Docker Networks für die Kommunikation zwischen Container
 
 ## Nginx Container starten
 
